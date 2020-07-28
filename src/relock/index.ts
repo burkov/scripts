@@ -41,7 +41,7 @@ const main = async () => {
     },
   ]);
   if (goAhead) {
-    _.forEach(dirs, (dir) => {
+    _.forEach(dirs, (dir: string) => {
       console.log(`Re-locking ${dir}`);
       shelljs.cd(dir);
       console.log('  removing node_modules');
