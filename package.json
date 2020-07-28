@@ -4,7 +4,11 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "prepublishOnly": "tsc"
+    "build": "rimraf ./lib && tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "bin": {
+    "relock": "node lib/jetprofile/relock/index.js"
   },
   "keywords": [],
   "author": "abu",
@@ -14,9 +18,13 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.158",
+    "@types/nodemon": "^1.19.0",
+    "@types/rimraf": "^3.0.0",
     "nodemon": "^2.0.4",
     "np": "^6.3.2",
     "npm-check-updates": "^7.0.2",
+    "rimraf": "^3.0.2",
     "typescript": "^3.9.7",
     "typesync": "^0.7.0"
   },
