@@ -11,7 +11,7 @@
     "lib"
   ],
   "bin": {
-    "relock": "node lib/jetprofile/relock/index.js"
+    "relock": "lib/relock/index.js"
   },
   "keywords": [],
   "author": "abu",
