@@ -41,8 +41,10 @@ const main = async () => {
     },
   ]);
   if (goAhead) {
+    const pwd = shelljs.pwd().stdout;
     _.forEach(dirs, (dir: string) => {
       console.log(`Re-locking ${dir}`);
+      shelljs.cd(pwd);
       shelljs.cd(dir);
       console.log('  removing node_modules');
       shelljs.rm('-rf', 'node_modules');
