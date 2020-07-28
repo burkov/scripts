@@ -20,5 +20,13 @@
   "dependencies": {
     "axios": "^0.19.2",
     "lodash": "^4.17.19"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/burkov/scripts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/burkov/scripts/issues"
+  },
+  "homepage": "https://github.com/burkov/scripts#readme",
 }
