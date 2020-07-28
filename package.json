@@ -22,6 +22,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "rimraf": "^3.0.2",
     "@types/inquirer": "^7.3.0",
     "@types/lodash": "^4.14.158",
     "@types/nodemon": "^1.19.0",
@@ -37,7 +38,6 @@
     "typesync": "^0.7.0"
   },
   "dependencies": {
-    "rimraf": "^3.0.2",
     "axios": "^0.19.2",
     "chalk": "^4.1.0",
     "findit": "^2.0.0",
