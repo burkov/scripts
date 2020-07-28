@@ -47,7 +47,7 @@ const main = async () => {
       console.log('  removing node_modules');
       shelljs.rm('-rf', 'node_modules');
       console.log('  removing package-lock.json');
-      shelljs.rm('package-lock.json');
+      shelljs.rm('-f', 'package-lock.json');
       console.log('  running npm install');
       shelljs.exec(`npm i`, { silent: true, fatal: true });
     });
