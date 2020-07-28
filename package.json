@@ -10,6 +10,9 @@
   "author": "abu",
   "license": "MIT",
   "types": "lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "nodemon": "^2.0.4",
     "np": "^6.3.2",
