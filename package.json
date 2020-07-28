@@ -2,13 +2,15 @@
   "name": "@aburkov/scripts",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublishOnly": "tsc"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "abu",
+  "license": "MIT",
+  "types": "lib/index.d.ts",
   "devDependencies": {
     "nodemon": "^2.0.4",
     "npm-check-updates": "^7.0.2",
