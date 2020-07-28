@@ -4,6 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
+    "test:relock": "ts-node src/relock/index.ts",
     "build": "rimraf ./lib && tsc",
     "prepublishOnly": "npm run build"
   },
@@ -21,19 +22,28 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/inquirer": "^7.3.0",
     "@types/lodash": "^4.14.158",
     "@types/nodemon": "^1.19.0",
+    "@types/prettier": "^2.0.2",
     "@types/rimraf": "^3.0.0",
+    "@types/shelljs": "^0.8.8",
     "nodemon": "^2.0.4",
     "np": "^6.3.2",
     "npm-check-updates": "^7.0.2",
-    "rimraf": "^3.0.2",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
     "typesync": "^0.7.0"
   },
   "dependencies": {
+    "rimraf": "^3.0.2",
     "axios": "^0.19.2",
-    "lodash": "^4.17.19"
+    "chalk": "^4.1.0",
+    "findit": "^2.0.0",
+    "inquirer": "^7.3.3",
+    "lodash": "^4.17.19",
+    "shelljs": "^0.8.4"
   },
   "repository": {
     "type": "git",
