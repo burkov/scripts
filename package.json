@@ -6,7 +6,7 @@
   "scripts": {
     "test:relock": "ts-node src/relock/index.ts",
     "build": "rimraf ./lib && tsc && exit 2",
-    "postversion": "cross-env-shell replace @VERSION@ $npm_package_version lib/config.json",
+    "postversion": "cross-env-shell replace @VERSION@ $npm_package_version src/config.json",
     "prepublishOnly": "npm run build"
   },
   "files": [
