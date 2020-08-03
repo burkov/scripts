@@ -4,6 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
+    "test:template": "ts-node src/index.ts template",
     "build": "rimraf ./lib && tsc",
     "postversion": "ts-node update-version.ts",
     "prepublishOnly": "npm run build"
