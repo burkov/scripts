@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import shelljs from 'shelljs';
 // @ts-ignore
 import findit from 'findit';

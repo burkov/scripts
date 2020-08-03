@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import commander from 'commander';
 import relock from './relock';
 import template from './template';
