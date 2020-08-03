@@ -4,9 +4,8 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "test:relock": "ts-node src/relock/index.ts",
-    "build": "rimraf ./lib && tsc && exit 2",
-    "postversion": "cross-env-shell replace @VERSION@ $npm_package_version src/config.json",
+    "build": "rimraf ./lib && tsc",
+    "postversion": "ts-node update-version.ts",
     "prepublishOnly": "npm run build"
   },
   "files": [
@@ -26,16 +25,16 @@
     "@types/inquirer": "^7.3.0",
     "@types/listr": "^0.14.2",
     "@types/lodash": "^4.14.158",
+    "@types/nconf": "^0.10.0",
     "@types/nodemon": "^1.19.0",
     "@types/prettier": "^2.0.2",
     "@types/rimraf": "^3.0.0",
     "@types/shelljs": "^0.8.8",
-    "cross-env": "^7.0.2",
+    "git-repo-info": "^2.1.1",
     "nodemon": "^2.0.4",
     "np": "^6.3.2",
     "npm-check-updates": "^7.0.2",
     "prettier": "^2.0.5",
-    "replace": "^1.2.0",
     "rimraf": "^3.0.2",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
@@ -51,6 +50,7 @@
     "inquirer": "^7.3.3",
     "listr": "^0.14.3",
     "lodash": "^4.17.19",
+    "nconf": "^0.10.0",
     "shelljs": "^0.8.4"
   },
   "repository": {

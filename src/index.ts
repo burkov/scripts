@@ -3,7 +3,6 @@ import relock from './relock';
 import template from './template';
 import up from './up';
 import * as process from 'process';
-
 import { version } from './config.json';
 
 commander.name('s').version(version);
