@@ -6,7 +6,7 @@
   "scripts": {
     "test:relock": "ts-node src/relock/index.ts",
     "build": "rimraf ./lib && tsc",
-    "postversion": "npm view @aburkov/scripts version > lib/version.json",
+    "postversion": "echo $npm_package_version",
     "prepublishOnly": "npm run build"
   },
   "files": [
