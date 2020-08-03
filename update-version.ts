@@ -9,5 +9,5 @@ const repoInfo = gitRepoInfo();
 nconf.file('src/config.json');
 nconf.set('version', repoInfo.lastTag);
 nconf.save(undefined);
-execa.commandSync('git commit -am Update version in config file');
+execa.sync('git', ['commit', '-a', '-m Update version in a config file']);
 execa.commandSync('git push');
