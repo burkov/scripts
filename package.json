@@ -12,7 +12,7 @@
     "lib"
   ],
   "bin": {
-    "relock": "lib/relock/index.js"
+    "s": "lib/index.js"
   },
   "keywords": [],
   "author": "abu",
@@ -22,8 +22,8 @@
     "access": "public"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2",
     "@types/inquirer": "^7.3.0",
+    "@types/listr": "^0.14.2",
     "@types/lodash": "^4.14.158",
     "@types/nodemon": "^1.19.0",
     "@types/prettier": "^2.0.2",
@@ -33,6 +33,7 @@
     "np": "^6.3.2",
     "npm-check-updates": "^7.0.2",
     "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
     "typesync": "^0.7.0"
@@ -40,8 +41,11 @@
   "dependencies": {
     "axios": "^0.19.2",
     "chalk": "^4.1.0",
+    "commander": "^6.0.0",
+    "execa": "^4.0.3",
     "findit": "^2.0.0",
     "inquirer": "^7.3.3",
+    "listr": "^0.14.3",
     "lodash": "^4.17.19",
     "shelljs": "^0.8.4"
   },

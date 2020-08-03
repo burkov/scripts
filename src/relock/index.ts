@@ -28,7 +28,7 @@ const findNpmRoots = (): Promise<string[]> => {
   });
 };
 
-const main = async () => {
+const relock = async () => {
   const dirs = await findNpmRoots();
   console.log('Re-locking following dirs:');
   dirs.forEach((d) => console.log(`  ${d}`));
@@ -56,4 +56,4 @@ const main = async () => {
   }
 };
 
-main().then();
+export default relock;
