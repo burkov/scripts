@@ -4,7 +4,9 @@ import template from './template';
 import up from './up';
 import * as process from 'process';
 
-commander.name('s').version('wtf');
+import { version } from './config.json';
+
+commander.name('s').version(version);
 
 commander
   .command('relock')

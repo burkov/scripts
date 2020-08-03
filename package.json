@@ -6,7 +6,7 @@
   "scripts": {
     "test:relock": "ts-node src/relock/index.ts",
     "build": "rimraf ./lib && tsc",
-    "postversion": "echo {version:\"$(git describe --abbrev=0)\"} > lib/version.json",
+    "postversion": "cross-env-shell replace @VERSION@ $npm_package_version lib/config.json",
     "prepublishOnly": "npm run build"
   },
   "files": [
@@ -30,10 +30,12 @@
     "@types/prettier": "^2.0.2",
     "@types/rimraf": "^3.0.0",
     "@types/shelljs": "^0.8.8",
+    "cross-env": "^7.0.2",
     "nodemon": "^2.0.4",
     "np": "^6.3.2",
     "npm-check-updates": "^7.0.2",
     "prettier": "^2.0.5",
+    "replace": "^1.2.0",
     "rimraf": "^3.0.2",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
@@ -45,6 +47,7 @@
     "commander": "^6.0.0",
     "execa": "^4.0.3",
     "findit": "^2.0.0",
+    "fx": "^19.0.1",
     "inquirer": "^7.3.3",
     "listr": "^0.14.3",
     "lodash": "^4.17.19",
