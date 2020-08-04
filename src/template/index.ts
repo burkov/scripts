@@ -1,5 +1,6 @@
 import execa from 'execa';
 import Listr from 'listr';
+import { syncTypesTasks } from '../up';
 
 const devPackages = [
   'typescript',
@@ -26,14 +27,7 @@ const template = () => {
       title: 'Initializing TypeScript configuration',
       task: () => execa('npx', ['tsc', '--init']),
     },
-    { // call up instead
-      title: 'Syncing types',
-      task: () => execa('npx', ['typesync']),
-    },
-    {
-      title: 'Installing packages with typings',
-      task: () => execa('npm', ['install']),
-    },
+    ...syncTypesTasks,
   ]);
   tasks.run().catch(console.error);
 };
