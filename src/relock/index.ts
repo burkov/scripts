@@ -18,26 +18,16 @@ const relock = async () => {
       console.log(`Re-locking ${chalk.blue(fullPath)}`);
       const tasks = new Listr([
         {
-          title: '  removing node_modules',
-          task: () => {
-            execa('ls', ['-l'], { cwd: fullPath }).then(({ stdout }) => console.log(stdout));
-            // shelljs.rm('-rf', 'node_modules');
-            return Promise.resolve();
-          },
+          title: 'removing node_modules',
+          task: () => execa('rm', ['-r', '-f', 'node_modules'], { cwd: fullPath }),
         },
         {
-          title: '  removing package-lock.json',
-          task: () => {
-            // shelljs.rm('-f', 'package-lock.json');
-            return Promise.resolve();
-          },
+          title: 'removing package-lock.json',
+          task: () => execa('rm', ['-f', 'package-lock.json'], { cwd: fullPath }),
         },
         {
-          title: '  running npm install',
-          task: () => {
-            console.log(fullPath);
-            //execa('npm', ['install'])
-          },
+          title: 'running npm install',
+          task: () => execa('npm', ['install'], { cwd: fullPath }),
         },
       ]);
       await tasks.run();
