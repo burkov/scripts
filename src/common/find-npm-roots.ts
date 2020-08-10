@@ -18,7 +18,7 @@ export const findNpmRoots = (): Promise<string[]> => {
     });
 
     finder.on('end', function () {
-      resolve(result);
+      resolve(result.map((e) => e.trim()).filter((e) => e.length > 0));
     });
   });
 };

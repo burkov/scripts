@@ -11,7 +11,7 @@ shelljs.config.fatal = true;
 
 const relock = async () => {
   const paths = await findNpmRoots();
-  if (await confirmIfMoreThanOnePath('Re-locking following paths:', paths)) {
+  if (await confirmIfMoreThanOnePath(`Re-locking following paths (${paths.length}):`, paths)) {
     const pwd = shelljs.pwd().stdout;
     for (const p of paths) {
       const fullPath = path.normalize(path.join(pwd, p));
