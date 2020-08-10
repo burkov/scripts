@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "ship:patch": "git ci -am bugfixes && np --yolo --no-release-draft patch && npm link --force",
+    "ship:patch": "git ci --allow-empty -am bugfixes && np --yolo --no-release-draft patch && npm link --force",
     "ship:minor": "git ci -am bugfixes && np --yolo --no-release-draft minor && npm link --force",
     "test:template": "ts-node src/index.ts template",
     "build": "rimraf ./lib && tsc",
