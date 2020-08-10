@@ -82,6 +82,11 @@ export const confirmIfMoreThanOnePath = async (
 export const printPaths = (paths: string[]) => {
   console.log(
     renderPaths(paths)
+      .sort((a, b) => {
+        if (a.length < b.length) return -1;
+        if (a.length > b.length) return 1;
+        return a.localeCompare(b);
+      })
       .map((e, i) => `${(i + 1).toString().padStart(4)}) ${e}`)
       .join('\n'),
   );
