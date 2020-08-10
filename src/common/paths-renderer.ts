@@ -1,17 +1,6 @@
-import chalk from 'chalk';
-import _ from 'lodash';
 import inquirer from 'inquirer';
 import { FilesTreeNode, levelIndents, treeFromPaths } from './files-tree-builder';
-
-const colors = _.shuffle([
-  chalk.red,
-  chalk.green,
-  chalk.yellow,
-  chalk.blue,
-  chalk.magenta,
-  chalk.cyan,
-  chalk.white,
-]);
+import { noColorFn, randomColorFn } from './colors';
 
 export const confirmIfMoreThanOnePath = async (
   message: string,
@@ -39,17 +28,13 @@ export interface RenderOptions {
   noColors?: boolean;
 }
 
-type ColorFn = (s: string) => string;
-
 export const renderPaths = (paths: string[], renderOptions?: RenderOptions): string[] => {
   const tree = treeFromPaths(paths);
   const indents = levelIndents(tree.root);
   const renderRecursively = (node: FilesTreeNode, indentLevel: number): string[] => {
     const padTo = indents[indentLevel] || 0;
     const children = node.children.flatMap((e) => renderRecursively(e, indentLevel + 1));
-    const colorFn: ColorFn = renderOptions?.noColors
-      ? _.identity
-      : colors[indentLevel] || chalk.white;
+    const colorFn = renderOptions?.noColors ? noColorFn : randomColorFn(indentLevel);
     return [colorFn(node.name.padEnd(padTo, ' ')), ...children];
   };
 

@@ -6,16 +6,22 @@ import Listr from 'listr';
 import execa from 'execa';
 import path from 'path';
 import chalk from 'chalk';
+import * as process from 'process';
+import { pathColorFn } from '../common/colors';
 
 shelljs.config.fatal = true;
 
 const relock = async () => {
   const paths = await findNpmRoots();
+  if (paths.length === 0) {
+    console.log(`No npm projects where found in current work dir (${pathColorFn(process.cwd())})`);
+    return;
+  }
   if (await confirmIfMoreThanOnePath(`Re-locking following paths (${paths.length}):`, paths)) {
     const pwd = shelljs.pwd().stdout;
     for (const p of paths) {
       const fullPath = path.normalize(path.join(pwd, p));
-      console.log(`Re-locking ${chalk.blue(fullPath)}`);
+      console.log(`Re-locking ${pathColorFn(fullPath)}`);
       const tasks = new Listr([
         {
           title: 'removing node_modules',
