@@ -29,6 +29,7 @@
     "@types/nconf": "^0.10.0",
     "@types/nodemon": "^1.19.0",
     "@types/prettier": "^2.0.2",
+    "@types/prettyjson": "^0.0.29",
     "@types/rimraf": "^3.0.0",
     "@types/shelljs": "^0.8.8",
     "git-repo-info": "^2.1.1",
@@ -52,6 +53,7 @@
     "listr": "^0.14.3",
     "lodash": "^4.17.19",
     "nconf": "^0.10.0",
+    "prettyjson": "^1.2.1",
     "shelljs": "^0.8.4"
   },
   "repository": {
