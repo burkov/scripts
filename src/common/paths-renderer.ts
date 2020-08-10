@@ -61,7 +61,10 @@ const colors = _.shuffle([
   chalk.white,
 ]);
 
-export const confirmIfMoreThanOnePath = async (message: string, paths: string[]): Promise<boolean> => {
+export const confirmIfMoreThanOnePath = async (
+  message: string,
+  paths: string[],
+): Promise<boolean> => {
   if (paths.length === 1) return true;
   console.log(message);
   printPaths(paths);
@@ -79,7 +82,7 @@ export const confirmIfMoreThanOnePath = async (message: string, paths: string[])
 export const printPaths = (paths: string[]) => {
   console.log(
     renderPaths(paths)
-      .map((e) => `  - ${e}`)
+      .map((e, i) => `${i.toString().padStart(4)}) ${e}`)
       .join('\n'),
   );
 };
@@ -90,7 +93,8 @@ export const renderPaths = (paths: string[]): string[] => {
   const renderRecursively = (node: FilesTreeNode, indentLevel: number): string[] => {
     const padTo = indents[indentLevel] || 0;
     const children = node.children.flatMap((e) => renderRecursively(e, indentLevel + 1));
-    return [colors[indentLevel](node.name.padEnd(padTo, ' ')), ...children];
+    const colorFn = colors[indentLevel] || chalk.white;
+    return [colorFn(node.name.padEnd(padTo, ' ')), ...children];
   };
 
   return tree.root.children.map((e) => {
