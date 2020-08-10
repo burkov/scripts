@@ -82,7 +82,7 @@ export const confirmIfMoreThanOnePath = async (
 export const printPaths = (paths: string[]) => {
   console.log(
     renderPaths(paths)
-      .map((e, i) => `${i.toString().padStart(4)}) ${e}`)
+      .map((e, i) => `${(i + 1).toString().padStart(4)}) ${e}`)
       .join('\n'),
   );
 };

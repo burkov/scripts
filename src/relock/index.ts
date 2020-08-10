@@ -1,6 +1,6 @@
 import shelljs from 'shelljs';
 import _ from 'lodash';
-import { findNpmRoots } from '../common';
+import { findNpmRoots } from '../common/find-npm-roots';
 import { confirmIfMoreThanOnePath } from '../common/paths-renderer';
 
 shelljs.config.fatal = true;
