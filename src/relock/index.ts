@@ -20,7 +20,7 @@ const relock = async () => {
         {
           title: '  removing node_modules',
           task: () => {
-            console.log(execa('ls', ['-l'], { cwd: fullPath }).stdout);
+            execa('ls', ['-l'], { cwd: fullPath }).then(({ stdout }) => console.log(stdout));
             // shelljs.rm('-rf', 'node_modules');
             return Promise.resolve();
           },
