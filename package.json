@@ -4,9 +4,10 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "ship:patch": "git ci --allow-empty -am bugfixes && np --yolo --no-release-draft patch && npm link --force",
-    "ship:minor": "git ci -am bugfixes && np --yolo --no-release-draft minor && npm link --force",
+    "ship:patch": "np --yolo --no-release-draft patch && npm link --force",
+    "ship:minor": "np --yolo --no-release-draft minor && npm link --force",
     "test:template": "ts-node src/index.ts template",
+    "test": "jest",
     "build": "rimraf ./lib && tsc",
     "postversion": "ts-node update-version.ts",
     "prepublishOnly": "npm run build"
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@types/inquirer": "^7.3.0",
+    "@types/jest": "^26.0.9",
     "@types/listr": "^0.14.2",
     "@types/lodash": "^4.14.158",
     "@types/nconf": "^0.10.0",
@@ -35,11 +37,13 @@
     "@types/rimraf": "^3.0.0",
     "@types/shelljs": "^0.8.8",
     "git-repo-info": "^2.1.1",
+    "jest": "^26.3.0",
     "nodemon": "^2.0.4",
     "np": "^6.3.2",
     "npm-check-updates": "^7.0.2",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
+    "ts-jest": "^26.1.4",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
     "typesync": "^0.7.0"

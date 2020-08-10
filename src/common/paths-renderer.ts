@@ -1,55 +1,7 @@
-import path from 'path';
 import chalk from 'chalk';
 import _ from 'lodash';
 import inquirer from 'inquirer';
-
-class FilesTreeNode {
-  readonly name: string;
-  readonly children: FilesTreeNode[] = [];
-  constructor(name: string) {
-    this.name = name;
-  }
-  addChildNode(name: string): FilesTreeNode {
-    const found = this.children.find((e) => e.name === name);
-    if (found) return found;
-    const newNode = new FilesTreeNode(name);
-    this.children.push(newNode);
-    return newNode;
-  }
-}
-
-class FilesTree {
-  readonly root: FilesTreeNode;
-  constructor() {
-    this.root = new FilesTreeNode('.');
-  }
-  addPath(name: string) {
-    let current = this.root;
-    path
-      .normalize(name)
-      .split(path.sep)
-      .forEach((e) => {
-        current = current.addChildNode(e);
-      });
-  }
-}
-
-const treeFromPaths = (paths: string[]): FilesTree => {
-  const result = new FilesTree();
-  paths.forEach(result.addPath.bind(result));
-  return result;
-};
-
-const levelIndents = (node: FilesTreeNode): number[] => {
-  const result: number[] = [];
-  const recur = (node: FilesTreeNode, i: number) => {
-    if ((result[i] || 0) < node.name.length) result[i] = node.name.length;
-    node.children.forEach((e) => recur(e, i + 1));
-  };
-  recur(node, 0);
-  result.shift();
-  return result;
-};
+import { FilesTreeNode, levelIndents, treeFromPaths } from './files-tree-builder';
 
 const colors = _.shuffle([
   chalk.red,
@@ -67,7 +19,11 @@ export const confirmIfMoreThanOnePath = async (
 ): Promise<boolean> => {
   if (paths.length === 1) return true;
   console.log(message);
-  printPaths(paths);
+  console.log(
+    renderPaths(paths)
+      .map((e, i) => `${(i + 1).toString().padStart(4)}) ${e}`)
+      .join('\n'),
+  );
   const { goAhead } = await inquirer.prompt([
     {
       type: 'confirm',
@@ -79,30 +35,29 @@ export const confirmIfMoreThanOnePath = async (
   return goAhead as boolean;
 };
 
-export const printPaths = (paths: string[]) => {
-  console.log(
-    renderPaths(paths)
-      .sort((a, b) => {
-        if (a.length < b.length) return -1;
-        if (a.length > b.length) return 1;
-        return a.localeCompare(b);
-      })
-      .map((e, i) => `${(i + 1).toString().padStart(4)}) ${e}`)
-      .join('\n'),
-  );
-};
+export interface RenderOptions {
+  noColors?: boolean;
+}
 
-export const renderPaths = (paths: string[]): string[] => {
+type ColorFn = (s: string) => string;
+
+export const renderPaths = (paths: string[], renderOptions?: RenderOptions): string[] => {
   const tree = treeFromPaths(paths);
   const indents = levelIndents(tree.root);
   const renderRecursively = (node: FilesTreeNode, indentLevel: number): string[] => {
     const padTo = indents[indentLevel] || 0;
     const children = node.children.flatMap((e) => renderRecursively(e, indentLevel + 1));
-    const colorFn = colors[indentLevel] || chalk.white;
+    const colorFn: ColorFn = renderOptions?.noColors
+      ? _.identity
+      : colors[indentLevel] || chalk.white;
     return [colorFn(node.name.padEnd(padTo, ' ')), ...children];
   };
 
-  return tree.root.children.map((e) => {
-    return renderRecursively(e, 0).join(' / ');
-  });
+  return tree.root.children
+    .map((e) => renderRecursively(e, 0).join(' / '))
+    .sort((a, b) => {
+      if (a.length < b.length) return -1;
+      if (a.length > b.length) return 1;
+      return a.localeCompare(b);
+    });
 };

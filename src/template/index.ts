@@ -9,6 +9,9 @@ const devPackages = [
   'ts-node',
   'prettier',
   'rimraf',
+  'jest',
+  'ts-jest',
+  '@types/jest'
 ];
 
 const corePackages = ['axios', 'lodash'];
@@ -26,6 +29,10 @@ const template = () => {
     {
       title: 'Initializing TypeScript configuration',
       task: () => execa('npx', ['tsc', '--init']),
+    },
+    {
+      title: 'Initializing ts-jest configuration',
+      task: () => execa('npx', ['ts-jest', 'config:init']),
     },
     ...syncTypesTasks,
   ]);
