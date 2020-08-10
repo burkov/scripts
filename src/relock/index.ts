@@ -14,7 +14,7 @@ shelljs.config.fatal = true;
 const relock = async () => {
   const paths = await findNpmRoots();
   if (paths.length === 0) {
-    console.log(`No npm projects where found in current work dir ${pathColorFn(process.cwd())}`);
+    console.log(`No npm projects were found in current work dir ${pathColorFn(process.cwd())}`);
     return;
   }
   if (await confirmIfMoreThanOnePath(`Re-locking following paths (${paths.length}):`, paths)) {
