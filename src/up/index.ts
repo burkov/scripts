@@ -1,11 +1,12 @@
 import Listr from 'listr';
 import execa from 'execa';
 import { findProjectsAndAskConfirmation } from '../common/find-npm-projects';
+import { pathColorFn } from '../common/colors';
 
 export const syncTypesTasks = (paths: string[]): Listr => {
   return new Listr(
     paths.map((cwd: string) => ({
-      title: `Updating types in '${cwd}'`,
+      title: `Updating types in ${pathColorFn(cwd)}`,
       task: () =>
         new Listr([
           {
@@ -18,12 +19,13 @@ export const syncTypesTasks = (paths: string[]): Listr => {
           },
         ]),
     })),
+    { concurrent: 2 },
   );
 };
 
 export const upTypes = async () => {
   await findProjectsAndAskConfirmation('Sync types?', (paths) => {
-    syncTypesTasks(paths).run().catch(console.error)
+    syncTypesTasks(paths).run().catch(console.error);
   });
 };
 
