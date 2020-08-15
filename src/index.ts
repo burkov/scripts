@@ -3,24 +3,30 @@
 import commander from 'commander';
 import relock from './relock';
 import template from './template';
-import up from './up';
 import * as process from 'process';
 import { version } from './config.json';
+import { upFull, upRelock, upTypes } from './up';
 
 commander.name('s').version(version);
 
-commander
+commander.command('te').description('projects template collection').action(template);
+
+const upCommand = commander.command('up').description('updates npm project(s)');
+
+upCommand
+  .command('types', { isDefault: true })
+  .alias('t')
+  .description('sync types only. This is the default')
+  .action(upTypes);
+upCommand
   .command('relock')
   .alias('re')
-  .description('recursively finds all package.json files and does a fresh install')
-  .action(relock);
-
-commander
-  .command('template')
-  .alias('t')
-  .description('projects template collection')
-  .action(template);
-
-commander.command('up').description('sync types and updates packages').action(up);
+  .description('remove package-lock.json and re-install deps')
+  .action(upRelock);
+upCommand
+  .command('full')
+  .alias('f')
+  .description('does the all above also updates package.json')
+  .action(upFull);
 
 commander.parse(process.argv);

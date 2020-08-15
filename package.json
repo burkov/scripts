@@ -6,7 +6,7 @@
   "scripts": {
     "ship:patch": "np --yolo --no-release-draft patch && npm link --force",
     "ship:minor": "np --yolo --no-release-draft minor && npm link --force",
-    "test:template": "ts-node src/index.ts template",
+    "test:command": "ts-node src/index.ts up",
     "test": "jest",
     "build": "rimraf ./lib && tsc",
     "postversion": "ts-node update-version.ts",

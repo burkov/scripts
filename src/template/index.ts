@@ -11,7 +11,7 @@ const devPackages = [
   'rimraf',
   'jest',
   'ts-jest',
-  '@types/jest'
+  '@types/jest',
 ];
 
 const corePackages = ['axios', 'lodash'];
@@ -34,7 +34,10 @@ const template = () => {
       title: 'Initializing ts-jest configuration',
       task: () => execa('npx', ['ts-jest', 'config:init']),
     },
-    ...syncTypesTasks,
+    {
+      title: 'Updating types',
+      task: () => syncTypesTasks(['.']),
+    },
   ]);
   tasks.run().catch(console.error);
 };
