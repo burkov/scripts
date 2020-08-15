@@ -1,12 +1,13 @@
 import Listr from 'listr';
 import execa from 'execa';
+import path from 'path';
 import { findProjectsAndAskConfirmation } from '../common/find-npm-projects';
 import { pathColorFn } from '../common/colors';
 
 export const syncTypesTasks = (paths: string[]): Listr => {
   return new Listr(
     paths.map((cwd: string) => ({
-      title: `Updating types in ${pathColorFn(cwd)}`,
+      title: `Updating types in ${pathColorFn(path.resolve(cwd))}`,
       task: () =>
         new Listr([
           {
