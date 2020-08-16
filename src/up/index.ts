@@ -62,7 +62,7 @@ export const upFull = async () => {
   await findProjectsAndAskConfirmation('Full update?', (paths: string[]) => {
     new Listr(
       paths.map((cwd) => ({
-        title: '',
+        title: 'Doing full project update',
         task: () =>
           new Listr([
             {
