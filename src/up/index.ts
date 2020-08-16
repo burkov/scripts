@@ -20,7 +20,7 @@ export const upRelock = () =>
   forEachConfirmedPath(
     'Re-lock?',
     (cwd: string) => `Re-locking ${pathColorFn(path.resolve(cwd))}`,
-    (cwd) => [removeNodeModuleDir(cwd), removePackageLock(cwd), runNpmInstall(cwd)],
+    (cwd: string) => [removeNodeModuleDir(cwd), removePackageLock(cwd), runNpmInstall(cwd)],
   );
 
 export const upFull = () =>
