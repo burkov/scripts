@@ -1,7 +1,13 @@
 import path from 'path';
-import {forEachConfirmedPath} from '../common/find-npm-projects';
-import {pathColorFn} from '../common/colors';
-import {removeNodeModuleDir, removePackageLock, runCheckUpdates, runNpmInstall, runTypesync,} from '../common/commands';
+import { forEachConfirmedPath } from '../common/find-npm-projects';
+import { pathColorFn } from '../common/colors';
+import {
+  removeNodeModuleDir,
+  removePackageLock,
+  runCheckUpdates,
+  runNpmInstall,
+  runTypesync,
+} from '../common/commands';
 
 export const upTypes = () =>
   forEachConfirmedPath(
@@ -21,13 +27,11 @@ export const upFull = () =>
   forEachConfirmedPath(
     'Full update?',
     (cwd) => `Doing full project update ${pathColorFn(cwd)}`,
-    (cwd) => {
-      return [
-        runCheckUpdates(cwd),
-        runTypesync(cwd),
-        removeNodeModuleDir(cwd),
-        removePackageLock(cwd),
-        runNpmInstall(cwd),
-      ];
-    },
+    (cwd) => [
+      runCheckUpdates(cwd),
+      runTypesync(cwd),
+      removeNodeModuleDir(cwd),
+      removePackageLock(cwd),
+      runNpmInstall(cwd),
+    ],
   );
