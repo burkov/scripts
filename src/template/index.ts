@@ -1,6 +1,6 @@
 import execa from 'execa';
 import Listr from 'listr';
-import { syncTypesInOneDir } from '../up';
+import { runNpmInstall, runTypesync } from '../up';
 
 const devPackages = [
   'typescript',
@@ -34,10 +34,8 @@ const template = () => {
       title: 'Initializing ts-jest configuration',
       task: () => execa('npx', ['ts-jest', 'config:init']),
     },
-    {
-      title: 'Updating types',
-      task: () => new Listr(syncTypesInOneDir('.')),
-    },
+    runTypesync('.'),
+    runNpmInstall('.'),
   ]);
   tasks.run().catch(console.error);
 };
