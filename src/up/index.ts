@@ -13,7 +13,7 @@ export const upTypes = () =>
   forEachConfirmedPath(
     'Sync types?',
     (cwd: string) => `Updating types in ${pathColorFn(path.resolve(cwd))}`,
-    (cwd) => [runTypesync(cwd), runNpmInstall(cwd)],
+    (cwd: string) => [runTypesync(cwd), runNpmInstall(cwd)],
   );
 
 export const upRelock = () =>
@@ -26,8 +26,8 @@ export const upRelock = () =>
 export const upFull = () =>
   forEachConfirmedPath(
     'Full update?',
-    (cwd) => `Doing full project update ${pathColorFn(cwd)}`,
-    (cwd) => [
+    (cwd: string) => `Doing full project update ${pathColorFn(cwd)}`,
+    (cwd: string) => [
       runCheckUpdates(cwd),
       runTypesync(cwd),
       removeNodeModuleDir(cwd),
