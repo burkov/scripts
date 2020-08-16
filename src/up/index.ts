@@ -52,9 +52,7 @@ export const upRelock = async () => {
       new Listr(
         paths.map((cwd) => ({
           title: `Re-locking ${pathColorFn(path.resolve(cwd))}`,
-          task: () => {
-            return new Listr(relockOneDir(cwd));
-          },
+          task: () => new Listr(relockOneDir(cwd)),
         })),
       ),
   );
