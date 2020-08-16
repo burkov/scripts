@@ -46,20 +46,21 @@ const relockOneDir = (cwd: string) => [
 ];
 
 export const upRelock = async () => {
-  await findProjectsAndAskConfirmation(
-    'Re-lock?',
-    (paths) =>
-      new Listr(
-        paths.map((cwd) => ({
-          title: `Re-locking ${pathColorFn(path.resolve(cwd))}`,
-          task: () => new Listr(relockOneDir(cwd)),
-        })),
-      ),
+  await findProjectsAndAskConfirmation('Re-lock?', (paths) =>
+    new Listr(
+      paths.map((cwd) => ({
+        title: `Re-locking ${pathColorFn(path.resolve(cwd))}`,
+        task: () => new Listr(relockOneDir(cwd)),
+      })),
+      { concurrent: 2 },
+    )
+      .run()
+      .catch(console.error),
   );
 };
 
 export const upFull = async () => {
-  await findProjectsAndAskConfirmation('Full update?', (paths: string[]) => {
+  await findProjectsAndAskConfirmation('Full update?', (paths: string[]) =>
     new Listr(
       paths.map((cwd) => ({
         title: 'Doing full project update',
@@ -73,6 +74,9 @@ export const upFull = async () => {
             ...relockOneDir(cwd),
           ]),
       })),
-    );
-  });
+      { concurrent: 2 },
+    )
+      .run()
+      .catch(console.error),
+  );
 };
