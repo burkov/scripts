@@ -28,24 +28,22 @@ const runCheckUpdates = (cwd: string) => ({
   task: () => execa('npx', ['npm-check-updates', '-u'], { cwd }),
 });
 
-export const upTypes = () => {
-  return forEachConfirmedPath(
+export const upTypes = () =>
+  forEachConfirmedPath(
     'Sync types?',
     (cwd: string) => `Updating types in ${pathColorFn(path.resolve(cwd))}`,
     (cwd) => [runTypesync(cwd), runNpmInstall(cwd)],
   );
-};
 
-export const upRelock = () => {
-  return forEachConfirmedPath(
+export const upRelock = () =>
+  forEachConfirmedPath(
     'Re-lock?',
     (cwd: string) => `Re-locking ${pathColorFn(path.resolve(cwd))}`,
     (cwd) => [removeNodeModuleDir(cwd), removePackageLock(cwd), runNpmInstall(cwd)],
   );
-};
 
-export const upFull = () => {
-  return forEachConfirmedPath(
+export const upFull = () =>
+  forEachConfirmedPath(
     'Full update?',
     (cwd) => `Doing full project update ${pathColorFn(cwd)}`,
     (cwd) => {
@@ -58,4 +56,3 @@ export const upFull = () => {
       ];
     },
   );
-};
