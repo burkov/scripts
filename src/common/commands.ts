@@ -22,5 +22,5 @@ export const runNpmInstall = (cwd: string) => ({
 
 export const runCheckUpdates = (cwd: string) => ({
   title: 'update package versions',
-  task: () => execa('npx', ['npm-check-updates', '-usdf'], { cwd }),
+  task: () => execa('npx', ['npm-check-updates', '-u'], { cwd, stdout: 'pipe'}),
 });
