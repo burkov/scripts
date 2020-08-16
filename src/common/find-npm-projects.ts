@@ -5,6 +5,7 @@ import { pathColorFn } from './colors';
 import process from 'process';
 import inquirer from 'inquirer';
 import { renderPaths } from './paths-renderer';
+import Listr from 'listr';
 
 const excludeFromSearch = ['.git', '.idea', 'node_modules', 'kotlin', 'build'];
 
@@ -44,6 +45,24 @@ const confirmIfMoreThanOnePath = async (message: string, paths: string[]): Promi
     },
   ]);
   return goAhead as boolean;
+};
+
+export const forEachConfirmedPath = (
+  confirmMessage: string,
+  titleFn: (path: string) => string,
+  processPath: (path: string) => Listr.ListrTask[],
+) => {
+  return findProjectsAndAskConfirmation(confirmMessage, (paths) => {
+    new Listr(
+      paths.map((cwd) => ({
+        title: titleFn(cwd),
+        task: () => new Listr(processPath(cwd)),
+      })),
+      { concurrent: 2 },
+    )
+      .run()
+      .catch(console.error);
+  });
 };
 
 export const findProjectsAndAskConfirmation = async (
