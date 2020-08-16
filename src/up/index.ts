@@ -4,7 +4,7 @@ import { forEachConfirmedPath } from '../common/find-npm-projects';
 import { pathColorFn } from '../common/colors';
 
 const runTypesync = (cwd: string) => ({
-  title: 'Syncing types',
+  title: 'syncing types',
   task: () => execa('npx', ['typesync'], { cwd }),
 });
 
@@ -24,7 +24,7 @@ const runNpmInstall = (cwd: string) => ({
 });
 
 const runCheckUpdates = (cwd: string) => ({
-  title: 'Update package versions',
+  title: 'update package versions',
   task: () => execa('npx', ['npm-check-updates', '-u'], { cwd }),
 });
 
