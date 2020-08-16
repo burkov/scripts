@@ -1,4 +1,4 @@
-import path from "path";
+import path from 'path';
 
 export class FilesTreeNode {
   readonly name: string;

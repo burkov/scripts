@@ -5,7 +5,7 @@ export type ColorFn = (s: string) => string;
 
 export const noColorFn: ColorFn = _.identity;
 
-export const pathColorFn: ColorFn = chalk.blue
+export const pathColorFn: ColorFn = chalk.blue;
 
 export const randomColorFn = (i: number) => randomColorFns[i] || noColorFn;
 

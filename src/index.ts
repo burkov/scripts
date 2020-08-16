@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import commander from 'commander';
-import relock from './relock';
 import template from './template';
 import * as process from 'process';
 import { version } from './config.json';
