@@ -1,49 +1,46 @@
-import Listr from 'listr';
 import execa from 'execa';
 import path from 'path';
 import { forEachConfirmedPath } from '../common/find-npm-projects';
 import { pathColorFn } from '../common/colors';
 
-export const syncTypesInOneDir = (cwd: string, skipInstall: boolean = false): Listr.ListrTask[] => [
-  {
-    title: 'Syncing types',
-    task: () => execa('npx', ['typesync'], { cwd }),
-  },
-  {
-    title: 'Installing packages with typings',
-    skip: () => skipInstall,
-    task: () => execa('npm', ['install'], { cwd }),
-  },
-];
+const runTypesync = (cwd: string) => ({
+  title: 'Syncing types',
+  task: () => execa('npx', ['typesync'], { cwd }),
+});
+
+const removeNodeModuleDir = (cwd: string) => ({
+  title: 'removing node_modules',
+  task: () => execa('rm', ['-r', '-f', 'node_modules'], { cwd }),
+});
+
+const removePackageLock = (cwd: string) => ({
+  title: 'removing package-lock.json',
+  task: () => execa('rm', ['-f', 'package-lock.json'], { cwd }),
+});
+
+const runNpmInstall = (cwd: string) => ({
+  title: 'running npm install',
+  task: () => execa('npm', ['install'], { cwd }),
+});
+
+const runCheckUpdates = (cwd: string) => ({
+  title: 'Update package versions',
+  task: () => execa('npx', ['npm-check-updates', '-u'], { cwd }),
+});
 
 export const upTypes = () => {
   return forEachConfirmedPath(
     'Sync types?',
     (cwd: string) => `Updating types in ${pathColorFn(path.resolve(cwd))}`,
-    syncTypesInOneDir,
+    (cwd) => [runTypesync(cwd), runNpmInstall(cwd)],
   );
 };
-
-const relockOneDir = (cwd: string) => [
-  {
-    title: 'removing node_modules',
-    task: () => execa('rm', ['-r', '-f', 'node_modules'], { cwd }),
-  },
-  {
-    title: 'removing package-lock.json',
-    task: () => execa('rm', ['-f', 'package-lock.json'], { cwd }),
-  },
-  {
-    title: 'running npm install',
-    task: () => execa('npm', ['install'], { cwd }),
-  },
-];
 
 export const upRelock = () => {
   return forEachConfirmedPath(
     'Re-lock?',
     (cwd: string) => `Re-locking ${pathColorFn(path.resolve(cwd))}`,
-    relockOneDir,
+    (cwd) => [removeNodeModuleDir(cwd), removePackageLock(cwd), runNpmInstall(cwd)],
   );
 };
 
@@ -53,12 +50,11 @@ export const upFull = () => {
     (cwd) => `Doing full project update ${pathColorFn(cwd)}`,
     (cwd) => {
       return [
-        {
-          title: 'Update package versions',
-          task: () => execa('npx', ['npm-check-updates', '-u'], { cwd }),
-        },
-        ...syncTypesInOneDir(cwd, true),
-        ...relockOneDir(cwd),
+        runCheckUpdates(cwd),
+        runTypesync(cwd),
+        removeNodeModuleDir(cwd),
+        removePackageLock(cwd),
+        runNpmInstall(cwd),
       ];
     },
   );
