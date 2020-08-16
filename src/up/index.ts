@@ -4,7 +4,7 @@ import path from 'path';
 import { findProjectsAndAskConfirmation } from '../common/find-npm-projects';
 import { pathColorFn } from '../common/colors';
 
-const syncTypesInOneDir = (cwd: string, skipInstall: boolean = false): Listr.ListrTask[] => [
+export const syncTypesInOneDir = (cwd: string, skipInstall: boolean = false): Listr.ListrTask[] => [
   {
     title: 'Syncing types',
     task: () => execa('npx', ['typesync'], { cwd }),

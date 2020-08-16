@@ -1,6 +1,6 @@
 import execa from 'execa';
 import Listr from 'listr';
-import { syncTypesInMultipleDirs } from '../up';
+import { syncTypesInOneDir } from '../up';
 
 const devPackages = [
   'typescript',
@@ -36,7 +36,7 @@ const template = () => {
     },
     {
       title: 'Updating types',
-      task: () => syncTypesInMultipleDirs(['.']),
+      task: () => new Listr(syncTypesInOneDir('.')),
     },
   ]);
   tasks.run().catch(console.error);
