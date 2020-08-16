@@ -1,4 +1,5 @@
 import execa from 'execa';
+import * as process from "process";
 
 export const runTypesync = (cwd: string) => ({
   title: 'syncing types',
@@ -22,5 +23,5 @@ export const runNpmInstall = (cwd: string) => ({
 
 export const runCheckUpdates = (cwd: string) => ({
   title: 'update package versions',
-  task: () => execa('npx', ['npm-check-updates', '-u'], { cwd, stdout: 'pipe'}),
+  task: () => execa('npx', ['npm-check-updates', '-u'], { cwd }).stdout?.pipe(process.stdout),
 });
