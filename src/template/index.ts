@@ -1,6 +1,6 @@
 import execa from 'execa';
 import Listr from 'listr';
-import { runNpmInstall, runTypesync } from '../up';
+import {runNpmInstall, runTypesync} from "../common/commands";
 
 const devPackages = [
   'typescript',
