@@ -1,6 +1,12 @@
-import execa from 'execa';
 import Listr from 'listr';
-import {runNpmInstall, runTypesync} from "../common/commands";
+import {
+  initializeJestConfig,
+  initializeTypescriptCompilerConfig,
+  installDependencies,
+  installDevDependencies,
+  runNpmInstall,
+  syncTypes,
+} from '../common/commands';
 
 const devPackages = [
   'typescript',
@@ -17,25 +23,14 @@ const devPackages = [
 const corePackages = ['axios', 'lodash'];
 
 const template = () => {
+  const cwd = '.';
   const tasks = new Listr([
-    {
-      title: 'Installing dev packages',
-      task: () => execa('npm', ['i', '-D', ...devPackages]),
-    },
-    {
-      title: 'Installing core packages',
-      task: () => execa('npm', ['i', ...corePackages]),
-    },
-    {
-      title: 'Initializing TypeScript configuration',
-      task: () => execa('npx', ['tsc', '--init']),
-    },
-    {
-      title: 'Initializing ts-jest configuration',
-      task: () => execa('npx', ['ts-jest', 'config:init']),
-    },
-    runTypesync('.'),
-    runNpmInstall('.'),
+    installDevDependencies(cwd, devPackages),
+    installDependencies(cwd, corePackages),
+    initializeTypescriptCompilerConfig(cwd),
+    initializeJestConfig(cwd),
+    syncTypes(cwd),
+    runNpmInstall(cwd),
   ]);
   tasks.run().catch(console.error);
 };

@@ -4,16 +4,16 @@ import { pathColorFn } from '../common/colors';
 import {
   removeNodeModuleDir,
   removePackageLock,
-  runCheckUpdates,
   runNpmInstall,
-  runTypesync,
+  syncTypes,
+  updatePackagesVersions,
 } from '../common/commands';
 
 export const upTypes = () =>
   forEachConfirmedPath(
     'Sync types?',
     (cwd: string) => `Updating types in ${pathColorFn(path.resolve(cwd))}`,
-    (cwd: string) => [runTypesync(cwd), runNpmInstall(cwd)],
+    (cwd: string) => [syncTypes(cwd), runNpmInstall(cwd)],
   );
 
 export const upRelock = () =>
@@ -28,8 +28,8 @@ export const upFull = () =>
     'Full update?',
     (cwd: string) => `Doing full project update ${pathColorFn(cwd)}`,
     (cwd: string) => [
-      runCheckUpdates(cwd),
-      runTypesync(cwd),
+      updatePackagesVersions(cwd),
+      syncTypes(cwd),
       removeNodeModuleDir(cwd),
       removePackageLock(cwd),
       runNpmInstall(cwd),
