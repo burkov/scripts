@@ -62,7 +62,7 @@ export const createTsFile = (cwd: string) => ({
 });
 
 export const createPrettierConfig = (cwd: string) => ({
-  title: 'Creating first TS file in a project',
+  title: 'Creating prettier config',
   task: () => {
     fs.writeFileSync(
       path.join(cwd, '.prittierrc.js'),
@@ -76,7 +76,7 @@ export const createPrettierConfig = (cwd: string) => ({
 });
 
 export const createUpdateVersionScript = (cwd: string) => ({
-  title: '',
+  title: 'Creating update-version.ts script',
   task: () => {
     fs.writeFileSync(
       path.join(cwd, 'update-version.ts'),
