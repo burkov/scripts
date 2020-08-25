@@ -1,5 +1,6 @@
 import Listr from 'listr';
 import {
+  createTsFile,
   initializeJestConfig, initializeNpmProject,
   initializeTypescriptCompilerConfig,
   installDependencies,
@@ -32,6 +33,7 @@ const template = () => {
     initializeJestConfig(cwd),
     syncTypes(cwd),
     runNpmInstall(cwd),
+    createTsFile(cwd)
   ]);
   tasks.run().catch(console.error);
 };

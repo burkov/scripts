@@ -1,4 +1,6 @@
 import execa from 'execa';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export const syncTypes = (cwd: string) => ({
   title: 'Syncing types',
@@ -48,4 +50,12 @@ export const initializeJestConfig = (cwd: string) => ({
 export const initializeNpmProject = (cwd: string) => ({
   title: 'Initializing npm project',
   task: () => execa('npm', ['init', '-y'], { cwd }),
-})
+});
+
+export const createTsFile = (cwd: string) => ({
+  title: 'Creating first TS file in a project',
+  task: () => {
+    fs.mkdirSync(path.join(cwd, 'src'), { recursive: true });
+    fs.writeFileSync(path.join(cwd, 'src', 'index.ts'), `console.log('Hello TS');`);
+  },
+});
