@@ -1,8 +1,12 @@
 import Listr from 'listr';
 import {
   createPrettierConfig,
-  createTsFile, createUpdateVersionScript, editPackageJson,
-  initializeJestConfig, initializeNpmProject,
+  createTsFile,
+  createUpdateVersionScript,
+  editPackageJson,
+  editTsConfig,
+  initializeJestConfig,
+  initializeNpmProject,
   initializeTypescriptCompilerConfig,
   installDependencies,
   installDevDependencies,
@@ -22,7 +26,7 @@ const devPackages = [
   '@types/jest',
   'git-repo-info',
   'nconf',
-  'execa'
+  'execa',
 ];
 
 const corePackages = ['axios', 'lodash'];
@@ -35,12 +39,13 @@ const template = () => {
     installDevDependencies(cwd, devPackages),
     installDependencies(cwd, corePackages),
     initializeTypescriptCompilerConfig(cwd),
+    editTsConfig(cwd),
     initializeJestConfig(cwd),
     syncTypes(cwd),
     runNpmInstall(cwd),
     createTsFile(cwd),
     createPrettierConfig(cwd),
-    createUpdateVersionScript(cwd)
+    createUpdateVersionScript(cwd),
   ]);
   tasks.run().catch(console.error);
 };

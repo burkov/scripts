@@ -98,12 +98,23 @@ execa.commandSync('git push');
   },
 });
 
+export const editTsConfig = (cwd: string) => ({
+  title: 'Editing tsconfig.json',
+  task: () => {
+    const file = editJsonFile(path.join(cwd, 'tsconfig.json'));
+    file.set('compilerOptions.outDir', './lib')
+    file.set('compilerOptions.rootDir', './src')
+    file.save()
+  }
+})
+
 export const editPackageJson = (cwd: string) => ({
   title: 'Editing package.json',
   task: () => {
     const file = editJsonFile(path.join(cwd, 'package.json'));
     file.set('author', 'abu');
     file.set('license', 'MIT');
+    file.set('main', 'lib/index.js');
     file.set('files', ['lib']);
     file.set('bin', { fixme: 'lib/index.js' });
     file.set('types', 'lib/index.d.ts');
