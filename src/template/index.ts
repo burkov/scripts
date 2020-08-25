@@ -1,6 +1,6 @@
 import Listr from 'listr';
 import {
-  initializeJestConfig,
+  initializeJestConfig, initializeNpmProject,
   initializeTypescriptCompilerConfig,
   installDependencies,
   installDevDependencies,
@@ -25,6 +25,7 @@ const corePackages = ['axios', 'lodash'];
 const template = () => {
   const cwd = '.';
   const tasks = new Listr([
+    initializeNpmProject(cwd),
     installDevDependencies(cwd, devPackages),
     installDependencies(cwd, corePackages),
     initializeTypescriptCompilerConfig(cwd),

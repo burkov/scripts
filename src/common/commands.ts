@@ -44,3 +44,8 @@ export const initializeJestConfig = (cwd: string) => ({
   title: 'Initializing ts-jest configuration',
   task: () => execa('npx', ['ts-jest', 'config:init'], { cwd }),
 });
+
+export const initializeNpmProject = (cwd: string) => ({
+  title: 'Initializing npm project',
+  task: () => execa('npm', ['init', '-y'], { cwd }),
+})
