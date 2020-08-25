@@ -43,7 +43,7 @@ export const initializeTypescriptCompilerConfig = (cwd: string) => ({
 });
 
 export const initializeJestConfig = (cwd: string) => ({
-  title: 'Initializing ts-jest configuration',
+  title: 'Initializing Jest configuration',
   task: () => execa('npx', ['ts-jest', 'config:init'], { cwd }),
 });
 
