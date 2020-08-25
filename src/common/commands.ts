@@ -118,5 +118,6 @@ export const editPackageJson = (cwd: string) => ({
       postversion: 'ts-node update-version.ts',
       prepublishOnly: 'npm run build',
     });
+    file.save();
   },
 });
