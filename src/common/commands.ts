@@ -109,7 +109,7 @@ export const editTsConfig = (cwd: string) => ({
 });
 
 export const runPrettier = (cwd: string) => ({
-  title: 'Run prettier',
+  title: 'Running prettier',
   task: () => execa('npm', ['run', 'prettier'], { cwd }),
 });
 
