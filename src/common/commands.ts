@@ -57,7 +57,11 @@ export const createTsFile = (cwd: string) => ({
   title: 'Creating first TS file in a project',
   task: () => {
     fs.mkdirSync(path.join(cwd, 'src'), { recursive: true });
-    fs.writeFileSync(path.join(cwd, 'src', 'index.ts'), `console.log('Hello TS');`);
+    fs.writeFileSync(
+      path.join(cwd, 'src', 'index.ts'),
+      `#!/usr/bin/env node
+console.log('Hello TS');`,
+    );
   },
 });
 
@@ -121,14 +125,14 @@ export const editPackageJson = (cwd: string) => ({
     file.set('license', 'MIT');
     file.set('main', 'lib/index.js');
     file.set('files', ['lib']);
-    file.set('bin', { fixme: 'lib/index.js' });
+    file.set('bin', { [path.basename(cwd)]: 'lib/index.js' });
     file.set('types', 'lib/index.d.ts');
     file.set('publishConfig', {
       access: 'public',
     });
     file.set('scripts', {
-      'ship:patch': 'np --yolo --no-release-draft patch && npm link --force',
-      'ship:minor': 'np --yolo --no-release-draft minor && npm link --force',
+      'ship:patch': 'np --yolo --no-release-draft --no-2fa patch && npm link --force',
+      'ship:minor': 'np --yolo --no-release-draft --no-2fa minor && npm link --force',
       prettier: 'prettier --write "src/**/*.ts*"',
       test: 'jest',
       build: 'rimraf ./lib && tsc',
