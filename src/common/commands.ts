@@ -125,7 +125,7 @@ export const editPackageJson = (cwd: string) => ({
     file.set('license', 'MIT');
     file.set('main', 'lib/index.js');
     file.set('files', ['lib']);
-    file.set('bin', { [path.basename(cwd)]: 'lib/index.js' });
+    file.set('bin', { [path.basename(path.resolve(cwd))]: 'lib/index.js' });
     file.set('types', 'lib/index.d.ts');
     file.set('publishConfig', {
       access: 'public',
