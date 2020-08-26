@@ -8,6 +8,7 @@
     "ship:minor": "np --yolo --no-release-draft minor && npm link --force",
     "test:command": "ts-node src/index.ts up",
     "test": "jest",
+    "prettier": "prettier --write \"src/**/*.ts*\"",
     "build": "rimraf ./lib && tsc",
     "postversion": "ts-node update-version.ts",
     "prepublishOnly": "npm run build"

@@ -102,11 +102,16 @@ export const editTsConfig = (cwd: string) => ({
   title: 'Editing tsconfig.json',
   task: () => {
     const file = editJsonFile(path.join(cwd, 'tsconfig.json'));
-    file.set('compilerOptions.outDir', './lib')
-    file.set('compilerOptions.rootDir', './src')
-    file.save()
-  }
-})
+    file.set('compilerOptions.outDir', './lib');
+    file.set('compilerOptions.rootDir', './src');
+    file.save();
+  },
+});
+
+export const runPrettier = (cwd: string) => ({
+  title: 'Run prettier',
+  task: () => execa('npm', ['run', 'prettier'], { cwd }),
+});
 
 export const editPackageJson = (cwd: string) => ({
   title: 'Editing package.json',
@@ -124,6 +129,7 @@ export const editPackageJson = (cwd: string) => ({
     file.set('scripts', {
       'ship:patch': 'np --yolo --no-release-draft patch && npm link --force',
       'ship:minor': 'np --yolo --no-release-draft minor && npm link --force',
+      prettier: 'prettier --write "src/**/*.ts*"',
       test: 'jest',
       build: 'rimraf ./lib && tsc',
       postversion: 'ts-node update-version.ts',

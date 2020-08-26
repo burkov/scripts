@@ -11,6 +11,7 @@ import {
   installDependencies,
   installDevDependencies,
   runNpmInstall,
+  runPrettier,
   syncTypes,
 } from '../common/commands';
 
@@ -22,6 +23,7 @@ const devPackages = [
   'prettier',
   'rimraf',
   'jest',
+  'np',
   'ts-jest',
   '@types/jest',
   'git-repo-info',
@@ -46,6 +48,7 @@ const template = () => {
     createTsFile(cwd),
     createPrettierConfig(cwd),
     createUpdateVersionScript(cwd),
+    runPrettier(cwd),
   ]);
   tasks.run().catch(console.error);
 };
