@@ -7,7 +7,7 @@
     "lpub": "npm run build && npm link -f",
     "ship:patch": "np --yolo --no-release-draft --no-2fa patch && npm link --force",
     "ship:minor": "np --yolo --no-release-draft --no-2fa minor && npm link --force",
-    "test:command": "ts-node src/index.ts up",
+    "test:command": "ts-node src/massren/index.ts -- --yes",
     "test": "jest",
     "prettier": "prettier --write \"src/**/*.ts*\"",
     "build": "rimraf ./lib && tsc",
