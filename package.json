@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "lpub": "npm run build && npm link -f",
+    "lpub": "npm run build && npm link --force",
     "ship:patch": "np --yolo --no-release-draft --no-2fa patch && npm link --force",
     "ship:minor": "np --yolo --no-release-draft --no-2fa minor && npm link --force",
     "test:command": "ts-node src/massren/index.ts -- --yes",
