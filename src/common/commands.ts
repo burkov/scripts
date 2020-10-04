@@ -69,35 +69,12 @@ export const createPrettierConfig = (cwd: string) => ({
   title: 'Creating prettier config',
   task: () => {
     fs.writeFileSync(
-      path.join(cwd, '.prittierrc.js'),
+      path.join(cwd, '.prettierrc.js'),
       `module.exports = {
     printWidth: 100,
     singleQuote: true,
     trailingComma: 'all',
 };`,
-    );
-  },
-});
-
-export const createUpdateVersionScript = (cwd: string) => ({
-  title: 'Creating update-version.ts script',
-  task: () => {
-    fs.writeFileSync(
-      path.join(cwd, 'update-version.ts'),
-      `#!/usr/bin/env node
-
-import nconf from 'nconf';
-import gitRepoInfo from 'git-repo-info';
-import execa from 'execa';
-
-const repoInfo = gitRepoInfo();
-
-nconf.file('src/config.json');
-nconf.set('version', repoInfo.lastTag);
-nconf.save(undefined);
-execa.sync('git', ['commit', '-a', '-m Update version in a config file']);
-execa.commandSync('git push');
-`,
     );
   },
 });
@@ -136,7 +113,6 @@ export const editPackageJson = (cwd: string) => ({
       prettier: 'prettier --write "src/**/*.ts*"',
       test: 'jest',
       build: 'rimraf ./lib && tsc',
-      postversion: 'ts-node update-version.ts',
       prepublishOnly: 'npm run build',
     });
     file.save();

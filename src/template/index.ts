@@ -2,7 +2,6 @@ import Listr from 'listr';
 import {
   createPrettierConfig,
   createTsFile,
-  createUpdateVersionScript,
   editPackageJson,
   editTsConfig,
   initializeJestConfig,
@@ -26,8 +25,6 @@ const devPackages = [
   'np',
   'ts-jest',
   '@types/jest',
-  'git-repo-info',
-  'nconf',
   'execa',
 ];
 
@@ -47,7 +44,6 @@ const template = () => {
     runNpmInstall(cwd),
     createTsFile(cwd),
     createPrettierConfig(cwd),
-    createUpdateVersionScript(cwd),
     runPrettier(cwd),
   ]);
   tasks.run().catch(console.error);

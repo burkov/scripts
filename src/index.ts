@@ -3,10 +3,7 @@
 import commander from 'commander';
 import template from './template';
 import * as process from 'process';
-import { version } from './config.json';
-import { upFull, upRelock, upTypes } from './up';
-
-commander.name('s').version(version);
+import { upFull, upTypes } from './up';
 
 commander.command('te').description('projects template collection').action(template);
 
@@ -17,11 +14,6 @@ upCommand
   .alias('t')
   .description('sync types only. This is the default')
   .action(upTypes);
-upCommand
-  .command('relock')
-  .alias('re')
-  .description('remove package-lock.json and re-install deps')
-  .action(upRelock);
 upCommand
   .command('full')
   .alias('f')
