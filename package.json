@@ -19,7 +19,9 @@
   "bin": {
     "relock": "lib/relock/index.js",
     "massren": "lib/massren/index.js",
-    "s": "lib/index.js"
+    "ncu": "lib/ncu/index.js",
+    "templ": "lib/templ/index.js",
+    "types": "lib/types/index.js"
   },
   "keywords": [],
   "author": "abu",

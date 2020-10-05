@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import Listr from 'listr';
 import {
   createPrettierConfig,
@@ -49,4 +51,4 @@ const template = () => {
   tasks.run().catch(console.error);
 };
 
-export default template;
+template();
